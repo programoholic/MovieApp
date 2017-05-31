@@ -1,0 +1,32 @@
+<div id="header">
+<h1>
+  {{title}}
+</h1> </div>
+<div class="input-group">
+  <input [(ngModel)]="searchText" (ngModelChange)="ontype($event)" class="form-control" placeholder="Search for..." required>
+  <span class="input-group-btn">
+        <button [disabled]="buttonIsDsbaled" class="btn btn-default" type="button" (click) ="OnSearch()" >Go!</button>
+      </span>
+</div>
+
+ <ng-container>
+
+  <div *ngFor="let movie of movieNameResult" infiniteScroll [infiniteScrollDistance]="-4"  [infiniteScrollThrottle]="1000" (scrolled)="scrolld()">
+    <div class="row">
+      <div class="col-md-5 item">
+        <img src="https://image.tmdb.org/t/p/w320{{movie.poster_path}}" >
+      </div>
+      <div class="col-md-7">
+        <p class="title">{{movie.title}}</p>
+        <button class="add" (click)="AddFavourite()" style="float: right;"> Add Favoirites</button>
+        <!--<p style="float: right;"> <span class="glyphicons glyphicons-heart"></span> </p>-->
+        <p class="release">{{movie.release_date}}</p>
+        <!--<p class="genre">{{movie.genre}}</p>-->
+        <p class="total">{{totalPages}}</p>
+        <p class="overview">{{movie.overview}}</p>
+        <p> {{ getGenreNames(movie.genre_ids) }}</p>
+
+      </div>
+    </div>
+  </div>
+ </ng-container>
